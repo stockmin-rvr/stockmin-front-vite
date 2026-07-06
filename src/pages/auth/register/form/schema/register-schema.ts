@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-export const RegisterSchema = z.object({
+export const CreateOwnerSchema = z.object({
     name: z.string().min(1, "El nombre es requerido"),
     lastname: z.string().min(1, "El apellido es requerido"),
     email: z.string().email("Email inválido"),
@@ -12,4 +12,4 @@ export const RegisterSchema = z.object({
     path: ["rePassword"]
 })
 
-export type RegisterType = z.infer<typeof RegisterSchema>
+export type CreateOwnerType = z.infer<typeof CreateOwnerSchema>

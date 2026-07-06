@@ -4,10 +4,12 @@ export type Theme = "light" | "dark";
 
 interface ThemeState {
   theme: Theme;
+  loadingScreen: boolean
 }
 
 const initialState: ThemeState = {
-    theme: 'light'
+    theme: 'light',
+    loadingScreen: false
 };
 
 const themeSlice = createSlice({
@@ -19,13 +21,17 @@ const themeSlice = createSlice({
         },
         toggleTheme(state) {
             state.theme = state.theme === 'light'? 'dark':'light';
+        },
+        setLoadingScreen(state, action: PayloadAction<boolean>){
+            state.loadingScreen = action.payload;
         }
     }
 });
 
 export const {
     setTheme,
-    toggleTheme
+    toggleTheme,
+    setLoadingScreen
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

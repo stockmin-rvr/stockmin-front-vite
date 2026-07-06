@@ -1,13 +1,12 @@
-import { ContentAuth } from "../../../components/AuthContent";
+import { ContentAuth } from "../components/AuthContent";
 import logoVertical from "../../../assets/logos/logo-vertical.png";
 import LoginForm from "./form/LoginForm";
 import { Link } from "react-router";
 import { useModal } from "../../../hooks/useModal";
+import ResetPasswordForm from "./form/ResetPasswordForm";
 
 export default function LoginPage() {
-
     const { openModal } = useModal();
-
 
     return (
         <ContentAuth type="login">
@@ -27,13 +26,13 @@ export default function LoginPage() {
                 <p>¿Olvidaste tu contraseña? <span className="text-primary-300 cursor-pointer" onClick={() => {
                     openModal({
                         title: 'titulo',
-                        size: 'lg',
+                        size: 'sm',
                         closeOnEscape: true,
                         closeOnOutside: true,
-                        render: ({close}) => (<div>Hola Modal <button type="button" onClick={close} className="bg-amber-200">Cerrar</button> </div>),
+                        render: () => (<ResetPasswordForm/>),
                     })
                 }}>Recupérala</span></p>
-                <p>¿No tienes cuenta? <Link className="text-primary-300 cursor-pointer" to='/auth/register' onClick={() => { }}>Regístrate</Link></p>
+                <p>¿No tienes cuenta? <Link className="text-primary-300 cursor-pointer" to='/auth/register'>Regístrate</Link></p>
             </div>
         </ContentAuth>
     );

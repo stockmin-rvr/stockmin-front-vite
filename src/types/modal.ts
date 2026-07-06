@@ -1,4 +1,4 @@
-export type ModalSize = | "sm" | "md" | "lg" | "xl" | "full";
+export type ModalSize = "sm" | "md" | "lg" | "xl" | "full";
 
 export interface ModalRenderProps {
     close: () => void;

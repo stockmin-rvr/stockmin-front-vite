@@ -1,5 +1,4 @@
-import { Link } from "react-router";
-import { ContentAuth } from "../../../components/AuthContent";
+import { ContentAuth } from "../components/AuthContent";
 import RegisterForm from "./form/RegisterForm";
 
 export default function RegisterPage() {
@@ -11,10 +10,6 @@ export default function RegisterPage() {
             </div>
 
             <RegisterForm />
-
-            <div className="text-center">
-                <p>¿Ya estas registrado? <Link className="text-primary-300 cursor-pointer" to="/auth/login">Inicia sesion</Link></p>
-            </div>
         </ContentAuth>
     );
 }
