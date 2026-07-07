@@ -3,21 +3,21 @@ import { getMessageErrorApi } from "../../config/api"
 import type { LoginType } from "../../pages/auth/login/form/schemas/login-schema"
 import type { CreateOwnerType } from "../../pages/auth/register/form/schema/register-schema"
 import { ownerService } from "../../services/auth/owner.service"
-import { setOwnerResponse, setOwnerLoading, setOwner, setVerificationOwner, resetVerificationOwner, resetOwner } from "../slices/ownerSlice"
+import { setResponseOwner, setLoadingOwner, setOwner, setVerificationOwner, resetVerificationOwner, resetOwner, resetResponseOwner } from "../slices/ownerSlice"
 import { setLoadingScreen } from "../slices/themeSlice"
 
 
 export const createOwner = (data: CreateOwnerType) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setOwnerLoading(true));
+            dispatch(setLoadingOwner(true));
             const owner = await ownerService.create(data);
-            dispatch(setOwnerResponse({ message: owner.message, type: 'success' }));
+            dispatch(setResponseOwner({ message: owner.message, type: 'success' }));
         } catch (error: any) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
-            dispatch(setOwnerLoading(false));
+            dispatch(setLoadingOwner(false));
         }
     }
 }
@@ -25,15 +25,15 @@ export const createOwner = (data: CreateOwnerType) => {
 export const loginOwner = (data: LoginType) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setOwnerLoading(true));
+            dispatch(setLoadingOwner(true));
             const response = await ownerService.login(data);
             dispatch(setOwner(response.owner));
             dispatch(setVerificationOwner(response.verification));
         } catch (error: any) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
-            dispatch(setOwnerLoading(false));
+            dispatch(setLoadingOwner(false));
         }
     }
 }
@@ -58,7 +58,7 @@ export const refreshTokenOwner = () => {
             dispatch(setVerificationOwner(response.verification));
         } catch (error: any) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
             dispatch(setLoadingScreen(false));
         }
@@ -68,15 +68,15 @@ export const refreshTokenOwner = () => {
 export const verifyAccountOwner = (data: { email: string, code: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setOwnerLoading(true));
+            dispatch(setLoadingOwner(true));
             const response = await ownerService.verifyAccount(data);
-            dispatch(setOwnerResponse({ message: response.message, type: 'success' }));
+            dispatch(setResponseOwner({ message: response.message, type: 'success' }));
             dispatch(setVerificationOwner(response.data));
         } catch (error) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
-            dispatch(setOwnerLoading(false));
+            dispatch(setLoadingOwner(false));
         }
     }
 }
@@ -84,14 +84,14 @@ export const verifyAccountOwner = (data: { email: string, code: string }) => {
 export const resentVerificationOwner = (data: { ownerId: string, email: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setOwnerLoading(true));
+            dispatch(setLoadingOwner(true));
             const response = await ownerService.resentVerification(data);
-            dispatch(setOwnerResponse({ message: response.message, type: 'success' }));
+            dispatch(setResponseOwner({ message: response.message, type: 'success' }));
         } catch (error) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
-            dispatch(setOwnerLoading(false));
+            dispatch(setLoadingOwner(false));
         }
     }
 }
@@ -99,14 +99,45 @@ export const resentVerificationOwner = (data: { ownerId: string, email: string }
 export const requestResetPasswordOwner = (data: { email: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
-            dispatch(setOwnerLoading(true));
+            dispatch(setLoadingOwner(true));
             const response = await ownerService.requestResetPassword(data);
-            dispatch(setOwnerResponse({ message: response.message, type: 'success' }));
+            dispatch(setResponseOwner({ message: response.message, type: 'success' }));
         } catch (error) {
             const message = getMessageErrorApi(error);
-            dispatch(setOwnerResponse({ message, type: 'error' }));
+            dispatch(setResponseOwner({ message, type: 'error' }));
         } finally {
-            dispatch(setOwnerLoading(false));
+            dispatch(setLoadingOwner(false));
+        }
+    }
+}
+
+export const verifyResetPasswordOwner = (data: { email: string, code: string }, setOwnerId: React.Dispatch<React.SetStateAction<string>>) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(resetResponseOwner());
+            dispatch(setLoadingOwner(true));
+            const response = await ownerService.verifyResetPassword(data);
+            setOwnerId(response.ownerId);
+        } catch (error) {
+            const message = getMessageErrorApi(error);
+            dispatch(setResponseOwner({ message, type: 'error' }));
+        } finally {
+            dispatch(setLoadingOwner(false));
+        }
+    }
+}
+
+export const updatePasswordOwner = (data: { ownerId: string; password: string; rePassword: string }) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(setLoadingOwner(true));
+            const response = await ownerService.updatePassword(data);
+            dispatch(setResponseOwner({ message: response.message, type: 'success' }));
+        } catch (error) {
+            const message = getMessageErrorApi(error);
+            dispatch(setResponseOwner({ message, type: 'error' }));
+        } finally {
+            dispatch(setLoadingOwner(false));
         }
     }
 }

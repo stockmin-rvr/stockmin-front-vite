@@ -2,7 +2,7 @@ import { LoadingIconSM } from "./Icons";
 import { FiEdit3 } from "react-icons/fi";
 import { RiDeleteBin7Line } from "react-icons/ri";
 import { MdOutlineMoreVert } from "react-icons/md";
-
+import type React from "react";
 
 interface ButtonAuthProp {
   children: React.ReactNode;
@@ -73,32 +73,40 @@ export function ButtonDashboard({
   )
 }
 
-type ActionButtonsProp = {
-  actionEdit: () => void;
-  actionDelete: () => void;
-  actionMore: () => void;
+type ButtonActionsProp = {
+  actions: {
+    type?: 'edit' | 'delete' | 'more' ,
+    customIcon?: React.ReactNode,
+    color: 'primary' | 'danger' | 'neutral',
+    onClick: () => void
+  }[];
   loading?: boolean;
 }
-export function ButtonActions({actionEdit, actionDelete, actionMore, loading}:ActionButtonsProp) {
+export function ButtonActions({ actions, loading }: ButtonActionsProp) {
   const classBasic = 'w-6 h-6 hover:bg-primary-100/20 rounded-full flex justify-center items-center cursor-pointer disabled:text-neutral-200 disabled:cursor-not-allowed disabled:bg-neutral-100/10';
+
+  const colors = {
+    primary: 'text-primary-300',
+    danger: 'text-danger-300',
+    neutral: 'text-neutral-200',
+  }
+
+  const icons = {
+    edit: <FiEdit3/>,
+    delete: <RiDeleteBin7Line/>,
+    more: <MdOutlineMoreVert/>
+  }
 
   return (
     <div className="flex justify-center gap-2" >
-      <button 
-        className={`${classBasic} text-primary-300`} 
-        onClick={actionEdit}
-        disabled={loading}
-      ><FiEdit3 /></button>
-      <button 
-        className={`${classBasic} text-danger-300`} 
-        onClick={actionDelete}
-        disabled={loading}
-      ><RiDeleteBin7Line /></button>
-      <button 
-        className={`${classBasic} text-neutral-200`} 
-        onClick={actionMore}
-        disabled={loading}
-      ><MdOutlineMoreVert /></button>
+      {actions.map((a, i) =>
+        <button
+          key={i}
+          className={`${classBasic} ${colors[a.color]}`}
+          onClick={a.onClick}
+          disabled={loading}
+        >{a.customIcon || icons[a.type || 'more'] }</button>
+      )}
     </div>
   )
 }

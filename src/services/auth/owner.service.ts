@@ -27,6 +27,15 @@ type RequestResetPasswordResponse = {
   message: string
 }
 
+type VerifyResetPasswordResponse = {
+  ownerId: string;
+  message: string
+}
+
+type UpdatePasswordResponse = {
+  message: string
+}
+
 export const ownerService = {
   login: async (data: LoginType):Promise<LoginResponse> => {
     const response = await api.post("/auth/login", data);
@@ -50,11 +59,11 @@ export const ownerService = {
     const response = await api.post("/owners/verify", data);
     return response.data;
   },
-  verifyResetPassword: async (data: { email: string, code: string }) => {
+  verifyResetPassword: async (data: { email: string, code: string }):Promise<VerifyResetPasswordResponse> => {
     const response = await api.post("/owners/verify-reset-password", data);
     return response.data;
   },
-  updatePassword: async (data: { ownerId: string; password: string; rePassword: string }) => {
+  updatePassword: async (data: { ownerId: string; password: string; rePassword: string }):Promise<UpdatePasswordResponse> => {
     const response = await api.post("/owners/update-password", data);
     return response.data;
   },

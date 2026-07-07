@@ -4,12 +4,14 @@ export type Theme = "light" | "dark";
 
 interface ThemeState {
   theme: Theme;
-  loadingScreen: boolean
+  loadingScreen: boolean;
+  isOpenNavbar:boolean;
 }
 
 const initialState: ThemeState = {
     theme: 'light',
-    loadingScreen: false
+    loadingScreen: false,
+    isOpenNavbar: false,
 };
 
 const themeSlice = createSlice({
@@ -24,6 +26,9 @@ const themeSlice = createSlice({
         },
         setLoadingScreen(state, action: PayloadAction<boolean>){
             state.loadingScreen = action.payload;
+        },
+        toggleNavbar(state){
+            state.isOpenNavbar = !state.isOpenNavbar; 
         }
     }
 });
@@ -31,7 +36,8 @@ const themeSlice = createSlice({
 export const {
     setTheme,
     toggleTheme,
-    setLoadingScreen
+    setLoadingScreen,
+    toggleNavbar
 } = themeSlice.actions;
 
 export default themeSlice.reducer;

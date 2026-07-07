@@ -3,7 +3,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Link, useSearchParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { verifyAccountOwner } from "../../../store/thunks/ownerThunk";
-import { resetOwnerResponse } from "../../../store/slices/ownerSlice";
+import { resetResponseOwner } from "../../../store/slices/ownerSlice";
 import { RiAccountPinCircleLine } from "react-icons/ri";
 import { ButtonAuth } from "../../../components/Buttons";
 
@@ -20,7 +20,7 @@ export default function VerifyAccountPage() {
     }
 
     useEffect(() => {
-        dispatch(resetOwnerResponse());
+        dispatch(resetResponseOwner());
     }, [])
 
     return (

@@ -1,11 +1,27 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ContentAuth } from "../auth/components/AuthContent";
 import { LoadingIconSM, PlusIconSM } from "../../components/Icons";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import BranchCard from "./components/BranchCard";
+import { useEffect } from "react";
+import { findAllBranch, loginBranch } from "../../store/thunks/branchThunk";
+import type { Branch } from "../../types/models";
 
 export default function BranchPage() {
   const {loading, list} = useAppSelector(s => s.branch);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const branchJSON = localStorage.getItem('branch');
+    if(branchJSON){
+      const branch:Branch = JSON.parse(branchJSON);
+      dispatch(loginBranch(branch));
+      navigate('/dashboard');
+    }else{
+      dispatch(findAllBranch());
+    }
+  }, [])
 
   return (
     <ContentAuth type="login">

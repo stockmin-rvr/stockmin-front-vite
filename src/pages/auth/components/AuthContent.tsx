@@ -11,7 +11,7 @@ import { ButtonAuth } from "../../../components/Buttons";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { TiWarningOutline } from "react-icons/ti";
 import { useModal } from "../../../hooks/useModal";
-import { resetOwnerResponse } from "../../../store/slices/ownerSlice";
+import { resetResponseOwner } from "../../../store/slices/ownerSlice";
 
 
 type ContentProp = {
@@ -136,7 +136,7 @@ function UnverifiedAccount() {
   }
 
   useEffect(() => {
-    dispatch(resetOwnerResponse());
+    dispatch(resetResponseOwner());
   }, [])
 
   return (

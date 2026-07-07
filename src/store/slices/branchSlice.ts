@@ -1,17 +1,20 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { Branch } from "../../types/models"
+import type { ResponseMessage } from "../../types/api";
 
 
 type BranchState = {
-    loading: boolean,
     branch: Branch | null,
     list: Branch[],
+    loading: boolean,
+    responseMessage: ResponseMessage,
 }
 
 const initialState: BranchState = {
     loading: false,
     branch: null,
-    list: []
+    list: [],
+    responseMessage: {message:'', type: null}
 }
 
 const branchSlice = createSlice({
@@ -27,8 +30,20 @@ const branchSlice = createSlice({
         setListBranch: (state, action: PayloadAction<Branch[]>) => {
             state.list = action.payload;
         },
+        addListBranch: (state, action: PayloadAction<Branch>) => {
+            state.list = [...state.list, action.payload];
+        },
         resetListBranch: (state) => {
             state.list = [];
+        },
+        setLoadingBranch: (state, action: PayloadAction<boolean>) => {
+            state.loading = action.payload;
+        },
+        setResponseBranch(state, action: PayloadAction<ResponseMessage>){
+            state.responseMessage = action.payload
+        },
+        resetResponseBranch(state){
+            state.responseMessage = {message: '', type: null}
         }
     }
 });
@@ -37,7 +52,11 @@ export const {
     setBranch,
     resetBranch,
     setListBranch,
-    resetListBranch
+    addListBranch,
+    resetListBranch,
+    setLoadingBranch,
+    setResponseBranch,
+    resetResponseBranch
 } = branchSlice.actions;
 
 export default branchSlice.reducer;

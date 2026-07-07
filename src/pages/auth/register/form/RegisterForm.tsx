@@ -7,7 +7,7 @@ import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { createOwner } from "../../../../store/thunks/ownerThunk";
 import { useEffect } from "react";
-import { resetOwnerResponse } from "../../../../store/slices/ownerSlice";
+import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
 import { Link, useNavigate } from "react-router";
 
 
@@ -22,7 +22,7 @@ export default function RegisterForm() {
     }
 
     useEffect(() => {
-        dispatch(resetOwnerResponse());
+        dispatch(resetResponseOwner());
     }, [])
 
     return (

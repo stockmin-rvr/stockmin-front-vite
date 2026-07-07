@@ -19,7 +19,7 @@ const ownerSlice = createSlice({
     name: 'owner',
     initialState,
     reducers: {
-        setOwnerLoading(state, action: PayloadAction<boolean>) {
+        setLoadingOwner(state, action: PayloadAction<boolean>) {
             state.loading = action.payload;
         },
         setOwner(state, action: PayloadAction<Owner>){
@@ -34,10 +34,10 @@ const ownerSlice = createSlice({
         resetVerificationOwner(state){
             state.verification = null
         },
-        setOwnerResponse(state, action: PayloadAction<ResponseMessage>){
+        setResponseOwner(state, action: PayloadAction<ResponseMessage>){
             state.responseMessage = action.payload
         },
-        resetOwnerResponse(state){
+        resetResponseOwner(state){
             state.responseMessage = {message: '', type: null}
         }
     }
@@ -48,9 +48,9 @@ export const {
     resetOwner,
     setVerificationOwner,
     resetVerificationOwner,
-    setOwnerLoading,
-    setOwnerResponse,
-    resetOwnerResponse
+    setLoadingOwner,
+    setResponseOwner,
+    resetResponseOwner
 } = ownerSlice.actions;
 
 export default ownerSlice.reducer;

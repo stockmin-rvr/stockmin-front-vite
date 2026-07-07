@@ -7,7 +7,7 @@ import { ButtonAuth } from "../../../../components/Buttons";
 import { loginOwner } from "../../../../store/thunks/ownerThunk";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { useEffect } from "react";
-import { resetOwnerResponse } from "../../../../store/slices/ownerSlice";
+import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
 
 export default function LoginForm() {
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(LoginSchema) });
@@ -19,7 +19,7 @@ export default function LoginForm() {
   }
   
   useEffect(() => {
-    dispatch(resetOwnerResponse());
+    dispatch(resetResponseOwner());
   }, []);
 
   return (

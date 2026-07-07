@@ -8,7 +8,7 @@ import { EmailIconSM } from "../../../../components/Icons";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { requestResetPasswordOwner } from "../../../../store/thunks/ownerThunk";
-import { resetOwnerResponse } from "../../../../store/slices/ownerSlice";
+import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
 
 export default function ResetPasswordForm() {
     const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ export default function ResetPasswordForm() {
     }
 
     useEffect(() => {
-        dispatch(resetOwnerResponse());
+        dispatch(resetResponseOwner());
     }, [])
 
     return (
@@ -70,7 +70,7 @@ export default function ResetPasswordForm() {
                     <h2 className="text-xl font-semibold mb-2">Error al enviar la solicitud</h2>
 
                     <p className="text-sm text-foreground/60 mb-6">{responseMessage.message}</p>
-                    <ButtonAuth onClick={() => { dispatch(resetOwnerResponse()) }}>Volver a intentar</ButtonAuth>
+                    <ButtonAuth onClick={() => { dispatch(resetResponseOwner()) }}>Volver a intentar</ButtonAuth>
                 </div>
             )}
         </div>
