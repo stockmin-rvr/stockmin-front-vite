@@ -2,14 +2,13 @@ import type React from "react";
 
 interface DataTableSMProp {
   header: string[];
-  textAlignmentHeader?: 'text-start'|'text-center'|'text-end';
+  alignment?: 'start'|'center'|'end';
   data?: (string | React.ReactNode | undefined)[][];
   className?: string;
   loading?: boolean;
 }
 
-export function DataTable({ header, textAlignmentHeader='text-start', data = [], className, loading }: DataTableSMProp) {
-
+export function DataTable({ header, alignment='start', data = [], className, loading }: DataTableSMProp) {
   return (
     <div className={`${className}`}>
       {/* TABLE */}
@@ -18,7 +17,7 @@ export function DataTable({ header, textAlignmentHeader='text-start', data = [],
           <thead>
             <tr>
               {header.map((value, i) => (
-                <th key={i} className={`${textAlignmentHeader} sticky top-0 z-10 bg-content font-medium p-2 uppercase text-sm text-neutral-100`}>
+                <th key={i} className={`text-${alignment} sticky top-0 z-10 bg-content font-medium p-2 uppercase text-sm text-neutral-100`}>
                   {value}
                 </th>
               ))}
@@ -50,7 +49,7 @@ export function DataTable({ header, textAlignmentHeader='text-start', data = [],
                       >
                         {row.map((col, c) => (
                           <td key={c} className="p-2 text-dark-mint">
-                            <div className="flex items-center">
+                            <div className={`flex items-center justify-${alignment}`}>
                               {col}
                             </div>
                           </td>

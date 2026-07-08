@@ -46,12 +46,12 @@ export type Category = {
 }
 
 export type MeasurementUnit = {
-    _id: string,
-    branchId: string,
-    abbreviation: string,
-    code: string,
-    name: string,
-    description: string,
-    createdAt: string,
-    updatedAt: string,
+  _id?: string,
+  branchId?: string,
+  code: string,
+  name: string,
+  abbreviation: string,
+  description: string,
+  createdAt?: string,
+  updatedAt?: string,
 }

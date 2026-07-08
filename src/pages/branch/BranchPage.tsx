@@ -4,7 +4,7 @@ import { LoadingIconSM, PlusIconSM } from "../../components/Icons";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import BranchCard from "./components/BranchCard";
 import { useEffect } from "react";
-import { findAllBranch, loginBranch } from "../../store/thunks/branchThunk";
+import { findAllBranchApi, loginBranchApi } from "../../store/thunks/branchThunk";
 import type { Branch } from "../../types/models";
 
 export default function BranchPage() {
@@ -16,10 +16,10 @@ export default function BranchPage() {
     const branchJSON = localStorage.getItem('branch');
     if(branchJSON){
       const branch:Branch = JSON.parse(branchJSON);
-      dispatch(loginBranch(branch));
+      dispatch(loginBranchApi(branch));
       navigate('/dashboard');
     }else{
-      dispatch(findAllBranch());
+      dispatch(findAllBranchApi());
     }
   }, [])
 

@@ -7,7 +7,7 @@ import { setResponseOwner, setLoadingOwner, setOwner, setVerificationOwner, rese
 import { setLoadingScreen } from "../slices/themeSlice"
 
 
-export const createOwner = (data: CreateOwnerType) => {
+export const createOwnerApi = (data: CreateOwnerType) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));
@@ -22,7 +22,7 @@ export const createOwner = (data: CreateOwnerType) => {
     }
 }
 
-export const loginOwner = (data: LoginType) => {
+export const loginOwnerApi = (data: LoginType) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));
@@ -38,7 +38,7 @@ export const loginOwner = (data: LoginType) => {
     }
 }
 
-export const logoutOwner = () => {
+export const logoutOwnerApi = () => {
     return async (dispatch: AppDispatch) => {
         dispatch(resetVerificationOwner());
         dispatch(resetOwner());
@@ -47,7 +47,7 @@ export const logoutOwner = () => {
     }
 }
 
-export const refreshTokenOwner = () => {
+export const refreshTokenOwnerApi = () => {
     return async (dispatch: AppDispatch) => {
         const refresh_token = localStorage.getItem('refresh_token');
         if (!refresh_token) return;
@@ -65,7 +65,7 @@ export const refreshTokenOwner = () => {
     }
 }
 
-export const verifyAccountOwner = (data: { email: string, code: string }) => {
+export const verifyAccountOwnerApi = (data: { email: string, code: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));
@@ -81,7 +81,7 @@ export const verifyAccountOwner = (data: { email: string, code: string }) => {
     }
 }
 
-export const resentVerificationOwner = (data: { ownerId: string, email: string }) => {
+export const resentVerificationOwnerApi = (data: { ownerId: string, email: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));
@@ -96,7 +96,7 @@ export const resentVerificationOwner = (data: { ownerId: string, email: string }
     }
 }
 
-export const requestResetPasswordOwner = (data: { email: string }) => {
+export const requestResetPasswordOwnerApi = (data: { email: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));
@@ -111,7 +111,7 @@ export const requestResetPasswordOwner = (data: { email: string }) => {
     }
 }
 
-export const verifyResetPasswordOwner = (data: { email: string, code: string }, setOwnerId: React.Dispatch<React.SetStateAction<string>>) => {
+export const verifyResetPasswordOwnerApi = (data: { email: string, code: string }, setOwnerId: React.Dispatch<React.SetStateAction<string>>) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(resetResponseOwner());
@@ -127,7 +127,7 @@ export const verifyResetPasswordOwner = (data: { email: string, code: string }, 
     }
 }
 
-export const updatePasswordOwner = (data: { ownerId: string; password: string; rePassword: string }) => {
+export const updatePasswordOwnerApi = (data: { ownerId: string; password: string; rePassword: string }) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingOwner(true));

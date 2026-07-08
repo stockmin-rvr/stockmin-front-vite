@@ -6,7 +6,7 @@ import { toggleNavbar, toggleTheme } from "../../store/slices/themeSlice";
 import { IoMenu, IoMoonSharp } from "react-icons/io5";
 import { FaSun } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-import { logoutBranch } from "../../store/thunks/branchThunk";
+import { logoutBranchApi } from "../../store/thunks/branchThunk";
 
 export default function DashboardPage() {
     return (
@@ -14,7 +14,7 @@ export default function DashboardPage() {
             <Navbar />
             <div className="flex-1 flex flex-col gap-4">
                 <Header/>
-                <div className="w-full h-full bg-content rounded-xl p-4">
+                <div className="w-full h-0 flex-1 bg-content rounded-xl p-4">
                     <Outlet />
                 </div>
             </div>
@@ -27,7 +27,7 @@ function Header() {
     const dispatch = useAppDispatch();
 
     const logout = () => {
-        dispatch(logoutBranch());
+        dispatch(logoutBranchApi());
         navigate("/branch/list");
     }
 

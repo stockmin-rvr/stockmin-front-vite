@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from './slices/themeSlice';
 import ownerReducer from './slices/ownerSlice';
 import branchReducer from './slices/branchSlice';
+import productsReducer from './slices/productsSlice';
 
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
         owner: ownerReducer,
-        branch: branchReducer
+        branch: branchReducer,
+        products: productsReducer
     }
 });
 

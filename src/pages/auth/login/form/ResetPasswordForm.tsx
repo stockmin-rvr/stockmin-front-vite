@@ -7,7 +7,7 @@ import { InputTextAuth } from "../../../../components/Inputs";
 import { EmailIconSM } from "../../../../components/Icons";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { requestResetPasswordOwner } from "../../../../store/thunks/ownerThunk";
+import { requestResetPasswordOwnerApi } from "../../../../store/thunks/ownerThunk";
 import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
 
 export default function ResetPasswordForm() {
@@ -16,7 +16,7 @@ export default function ResetPasswordForm() {
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: zodResolver(RequestResetPasswordSchema) });
 
     const onSubmit = (data: RequestResetPasswordType) => {
-        dispatch(requestResetPasswordOwner(data));
+        dispatch(requestResetPasswordOwnerApi(data));
     }
 
     useEffect(() => {

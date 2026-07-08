@@ -4,7 +4,7 @@ import { ContentAuth } from "../components/AuthContent";
 import { Link, useSearchParams } from "react-router";
 import ResetPasswordForm from "./form/ResetPasswordForm";
 import { useEffect, useState } from "react";
-import { verifyResetPasswordOwner } from "../../../store/thunks/ownerThunk";
+import { verifyResetPasswordOwnerApi } from "../../../store/thunks/ownerThunk";
 
 export default function ResetPasswordPage() {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     if (email && code) {
-      dispatch(verifyResetPasswordOwner({ email, code }, setOwnerId));
+      dispatch(verifyResetPasswordOwnerApi({ email, code }, setOwnerId));
     } else {
       console.log('No se encontraron las querys');
     }

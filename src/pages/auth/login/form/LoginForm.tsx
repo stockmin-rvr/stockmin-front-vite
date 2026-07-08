@@ -4,7 +4,7 @@ import { LoginSchema, type LoginType } from "./schemas/login-schema";
 import { EmailIconSM, LockIconSM } from "../../../../components/Icons";
 import { InputPasswordAuth, InputTextAuth } from "../../../../components/Inputs";
 import { ButtonAuth } from "../../../../components/Buttons";
-import { loginOwner } from "../../../../store/thunks/ownerThunk";
+import { loginOwnerApi } from "../../../../store/thunks/ownerThunk";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
 import { useEffect } from "react";
 import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
@@ -15,7 +15,7 @@ export default function LoginForm() {
   const {loading, responseMessage} = useAppSelector(s => s.owner);
 
   const onSubmit = (data: LoginType) => {
-    dispatch(loginOwner(data));
+    dispatch(loginOwnerApi(data));
   }
   
   useEffect(() => {

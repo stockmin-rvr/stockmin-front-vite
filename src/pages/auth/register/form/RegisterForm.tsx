@@ -5,7 +5,7 @@ import { EmailIconSM, LockIconSM, UserIconSM } from "../../../../components/Icon
 import { InputPasswordAuth, InputTextAuth } from "../../../../components/Inputs";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { createOwner } from "../../../../store/thunks/ownerThunk";
+import { createOwnerApi } from "../../../../store/thunks/ownerThunk";
 import { useEffect } from "react";
 import { resetResponseOwner } from "../../../../store/slices/ownerSlice";
 import { Link, useNavigate } from "react-router";
@@ -18,7 +18,7 @@ export default function RegisterForm() {
     const { loading, responseMessage } = useAppSelector(s => s.owner);
 
     const onSubmit = (data: CreateOwnerType) => {
-        dispatch(createOwner(data));
+        dispatch(createOwnerApi(data));
     }
 
     useEffect(() => {

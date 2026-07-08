@@ -1,13 +1,13 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
 import type { Branch } from "../../types/models"
-import type { ResponseMessage } from "../../types/api";
+import type { ResponseMessageType } from "../../types/api";
 
 
 type BranchState = {
     branch: Branch | null,
     list: Branch[],
     loading: boolean,
-    responseMessage: ResponseMessage,
+    responseMessage: ResponseMessageType,
 }
 
 const initialState: BranchState = {
@@ -39,7 +39,7 @@ const branchSlice = createSlice({
         setLoadingBranch: (state, action: PayloadAction<boolean>) => {
             state.loading = action.payload;
         },
-        setResponseBranch(state, action: PayloadAction<ResponseMessage>){
+        setResponseBranch(state, action: PayloadAction<ResponseMessageType>){
             state.responseMessage = action.payload
         },
         resetResponseBranch(state){

@@ -5,7 +5,7 @@ import { branchService } from "../../services/branch/branch.service";
 import type { Branch } from "../../types/models";
 import { addListBranch, resetBranch, resetResponseBranch, setBranch, setListBranch, setLoadingBranch, setResponseBranch } from "../slices/branchSlice";
 
-export const findAllBranch = () => {
+export const findAllBranchApi = () => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(resetResponseBranch());
@@ -21,7 +21,7 @@ export const findAllBranch = () => {
     }
 }
 
-export const createBranch = (data: CreateBranchType, file?: File | null) => {
+export const createBranchApi = (data: CreateBranchType, file?: File | null) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(resetResponseBranch());
@@ -38,14 +38,14 @@ export const createBranch = (data: CreateBranchType, file?: File | null) => {
     }
 }
 
-export const loginBranch = (branch: Branch) => {
+export const loginBranchApi = (branch: Branch) => {
     return async (dispatch: AppDispatch) => {
         localStorage.setItem('branch', JSON.stringify(branch));
         dispatch(setBranch(branch));
     }
 }
 
-export const logoutBranch = () => {
+export const logoutBranchApi = () => {
     return async (dispatch: AppDispatch) => {
         localStorage.removeItem('branch');
         dispatch(resetBranch());

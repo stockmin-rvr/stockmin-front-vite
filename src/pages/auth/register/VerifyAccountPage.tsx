@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Link, useSearchParams } from "react-router";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { verifyAccountOwner } from "../../../store/thunks/ownerThunk";
+import { verifyAccountOwnerApi } from "../../../store/thunks/ownerThunk";
 import { resetResponseOwner } from "../../../store/slices/ownerSlice";
 import { RiAccountPinCircleLine } from "react-icons/ri";
 import { ButtonAuth } from "../../../components/Buttons";
@@ -16,7 +16,7 @@ export default function VerifyAccountPage() {
     const code = searchParams.get("code") || '';
 
     const verifyAccount = () => {
-        dispatch(verifyAccountOwner({ email, code }))
+        dispatch(verifyAccountOwnerApi({ email, code }))
     }
 
     useEffect(() => {

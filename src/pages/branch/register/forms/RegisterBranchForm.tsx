@@ -6,7 +6,7 @@ import { InputFile, InputTextAuth } from "../../../../components/Inputs";
 import { CompanyIconSM, DocumentIconSM, LocationIconSM, MessageIconSM } from "../../../../components/Icons";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
-import { createBranch } from "../../../../store/thunks/branchThunk";
+import { createBranchApi } from "../../../../store/thunks/branchThunk";
 
 export default function RegisterBranchForm() {
     const { loading, responseMessage } = useAppSelector(s => s.branch);
@@ -15,7 +15,7 @@ export default function RegisterBranchForm() {
     const dispatch = useAppDispatch();
 
     const onSubmit = (data: CreateBranchType) => {
-        dispatch(createBranch(data, file))
+        dispatch(createBranchApi(data, file))
     }
 
     return (

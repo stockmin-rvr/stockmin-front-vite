@@ -6,7 +6,7 @@ import { toggleTheme } from "../../../store/slices/themeSlice";
 import { FaSun } from "react-icons/fa";
 import type { Owner } from "../../../types/models";
 import { useEffect, useState } from "react";
-import { logoutOwner, resentVerificationOwner } from "../../../store/thunks/ownerThunk";
+import { logoutOwnerApi, resentVerificationOwnerApi } from "../../../store/thunks/ownerThunk";
 import { ButtonAuth } from "../../../components/Buttons";
 import { HiOutlineMailOpen } from "react-icons/hi";
 import { TiWarningOutline } from "react-icons/ti";
@@ -65,7 +65,7 @@ function OwnerAccount({ owner }: { owner: Owner | null }) {
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutOwner());
+    dispatch(logoutOwnerApi());
   }
 
   if (!owner) return null
@@ -132,7 +132,7 @@ function UnverifiedAccount() {
 
   const resendVerification = async () => {
     const data = { ownerId: owner?._id || "", email: owner?.email || "" };
-    dispatch(resentVerificationOwner(data));
+    dispatch(resentVerificationOwnerApi(data));
   }
 
   useEffect(() => {

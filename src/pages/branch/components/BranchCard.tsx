@@ -2,7 +2,7 @@ import type { Branch } from "../../../types/models";
 import logo from "../../../assets/logos/logo-vertical.png";
 import { useAppDispatch } from "../../../store/hooks";
 import { useNavigate } from "react-router";
-import { loginBranch } from "../../../store/thunks/branchThunk";
+import { loginBranchApi } from "../../../store/thunks/branchThunk";
 
 type BranchCardProp = {
     branch: Branch;
@@ -13,7 +13,7 @@ export default function BranchCard({ branch }: BranchCardProp) {
     const navigate = useNavigate();
 
     const selectBranch = () => {
-        dispatch(loginBranch(branch));
+        dispatch(loginBranchApi(branch));
         navigate('/dashboard');
     }
 

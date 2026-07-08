@@ -1,43 +1,47 @@
-import { api } from "@/lib/api"
-import { Brand } from "@/types";
-import { CreateBrandType } from "@/ui/dashboard/products/brand/schemas/create-brand-schema"
-import { UpdateBrandType } from "@/ui/dashboard/products/brand/schemas/update-brand-schema";
+import { api } from "../../config/api";
+import type { CreateBrandType } from "../../pages/dashboard/products/brand/forms/schemas/create-brand-schema";
+import type { UpdateBrandType } from "../../pages/dashboard/products/brand/forms/schemas/update-brand-schema";
+import type { Brand } from "../../types/models";
 
-export type CreateBrandResponse = {
+type CreateResponse = {
     message: string;
     data: Brand;
 }
 
-export type GetAllBrandsRespnse = {
+type UpdateResponse = {
+    message: string;
+    data: Brand;
+}
+
+type FindAllResponse = {
     message: string;
     data: Brand[];
 }
 
-export type DeleteBrandResponse = {
+type DeleteResponse = {
     message: string;
     data: Brand;
 }
 
-export const createBrand = async(data:CreateBrandType) => {
-    const response = await api.post('/brand', data );
-    return response.data
-}
-
-export const updateBrand = async({brandId, data}:{brandId: string, data:UpdateBrandType}) => {
-    const response = await api.patch('/brand', data, {
-        params:{brandId}
-    });
-    return response.data
-}
-
-export const getAllBrands = async():Promise<Brand[]> => {
-    const response = await api.get('/brand' );
-    return response.data.data
-}
-
-export const deleteBrand = async(brandId: string):Promise<DeleteBrandResponse> => {
-    const response = await api.delete('/brand', {
-        params:{brandId}
-    });
-    return response.data
+export const brandService = {
+    create: async (data: CreateBrandType):Promise<CreateResponse> => {
+        const response = await api.post('/brand', data);
+        return response.data
+    },
+    update: async ({ brandId, data }: { brandId: string, data: UpdateBrandType }): Promise<UpdateResponse> => {
+        const response = await api.patch('/brand', data, {
+            params: { brandId }
+        });
+        return response.data
+    },
+    findAll: async (): Promise<FindAllResponse> => {
+        const response = await api.get('/brand');
+        return response.data
+    },
+    delete: async (brandId: string): Promise<DeleteResponse> => {
+        const response = await api.delete('/brand', {
+            params: { brandId }
+        });
+        return response.data
+    }
 }

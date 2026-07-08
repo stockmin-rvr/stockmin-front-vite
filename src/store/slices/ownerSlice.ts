@@ -1,12 +1,12 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Owner, Verification } from "../../types/models";
-import type { ResponseMessage } from "../../types/api";
+import type { ResponseMessageType } from "../../types/api";
 
 type OwnerState = {
     owner: Owner | null;
     verification: Verification | null;
     loading: boolean;
-    responseMessage: ResponseMessage;
+    responseMessage: ResponseMessageType;
 }
 
 const initialState: OwnerState = {
@@ -34,7 +34,7 @@ const ownerSlice = createSlice({
         resetVerificationOwner(state){
             state.verification = null
         },
-        setResponseOwner(state, action: PayloadAction<ResponseMessage>){
+        setResponseOwner(state, action: PayloadAction<ResponseMessageType>){
             state.responseMessage = action.payload
         },
         resetResponseOwner(state){

@@ -7,7 +7,7 @@ import { InputPasswordAuth } from "../../../../components/Inputs";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useNavigate } from "react-router";
 import { LockIconSM } from "../../../../components/Icons";
-import { updatePasswordOwner } from "../../../../store/thunks/ownerThunk";
+import { updatePasswordOwnerApi } from "../../../../store/thunks/ownerThunk";
 
 type ResetPasswordFormProp = {
     ownerId: string;
@@ -21,7 +21,7 @@ export default function ResetPasswordForm({ ownerId }: ResetPasswordFormProp) {
 
     const onSubmit = (data: UpdatePasswordType) => {
         console.log(data);
-        dispatch(updatePasswordOwner({ownerId, ...data}));
+        dispatch(updatePasswordOwnerApi({ownerId, ...data}));
     }
 
     return (

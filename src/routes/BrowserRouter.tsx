@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { LoadingScreen } from "../components/LoadingScreen";
 import BranchPage from "../pages/branch/BranchPage";
 import { useEffect } from "react";
-import { refreshTokenOwner } from "../store/thunks/ownerThunk";
+import { refreshTokenOwnerApi } from "../store/thunks/ownerThunk";
 import RegisterBranchPage from "../pages/branch/register/RegisterBranchPage";
 import type { Branch, Owner } from "../types/models";
 import VerifyAccountPage from "../pages/auth/register/VerifyAccountPage";
@@ -15,6 +15,7 @@ import ProductsPage from "../pages/dashboard/products/ProductsPage";
 import ListProductPage from "../pages/dashboard/products/list/ListProductsPage";
 import BrandProductPage from "../pages/dashboard/products/brand/BrandProductsPage";
 import MeasurementUnitProductsPage from "../pages/dashboard/products/measurement-unit/MeasurementUnitProductsPage";
+import CategoryProductsPage from "../pages/dashboard/products/category/CategoryProductsPage";
 
 export default function AppRouter() {
   const { loadingScreen } = useAppSelector(s => s.theme);
@@ -23,7 +24,7 @@ export default function AppRouter() {
   const { branch } = useAppSelector((state) => state.branch);
 
   useEffect(() => {
-    dispatch(refreshTokenOwner());
+    dispatch(refreshTokenOwnerApi());
   }, [])
 
   if (loadingScreen) return <LoadingScreen />;
@@ -56,7 +57,7 @@ export default function AppRouter() {
               <Route index element={<Navigate to='list' replace />} />
               <Route path="list" element={<ListProductPage />} />
               <Route path="brand" element={<BrandProductPage />} />
-              <Route path="category" element={<ListProductPage />} />
+              <Route path="category" element={<CategoryProductsPage />} />
               <Route path="measurement-unit" element={<MeasurementUnitProductsPage />} />
             </Route>
           </Route>
