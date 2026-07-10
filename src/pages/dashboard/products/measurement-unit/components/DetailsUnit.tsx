@@ -4,7 +4,7 @@ import type { MeasurementUnit } from "../../../../../types/models";
 export default function DetailsUnitModal({data}:{data:MeasurementUnit}) {
 
   return (
-    <div className="min-w-60 max-w-92 flex flex-col gap-4 justify-center" >
+    <div className="flex flex-col gap-4 justify-center" >
       <div className="flex justify-center items-center">
         <span className="min-w-25 h-25 flex justify-center items-center text-5xl bg-primary-100/20 font-semibold text-primary-200 px-2 rounded-lg" >{data.abbreviation}</span>
       </div>

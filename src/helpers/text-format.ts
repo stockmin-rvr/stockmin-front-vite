@@ -18,12 +18,16 @@ export function getAbbreviation(text: string): string {
 }
 
 type FormatDateType = {
-    date: string | Date,
+    date: string | Date | undefined,
     showTime?: boolean
 }
 
 export function formatDate({date, showTime = false}: FormatDateType): string {
 
+  if(!date){
+    return "-";
+  }
+  
   const parsedDate = new Date(date);
 
   if (isNaN(parsedDate.getTime())) {

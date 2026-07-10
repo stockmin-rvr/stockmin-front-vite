@@ -69,7 +69,8 @@ interface SelectDashboardType {
   label?: string,
   placeholder?: string,
   error?: string,
-  disabled?: boolean
+  disabled?: boolean,
+  defaultValue?:string
 }
 
 export function SelectDashboard({
@@ -78,6 +79,7 @@ export function SelectDashboard({
   placeholder = '...',
   error = '',
   disabled = false,
+  defaultValue="",
   ...props
 }: SelectDashboardType) {
   return (
@@ -88,6 +90,7 @@ export function SelectDashboard({
           {...props}
           className={`w-full bg-content border border-primary-300 px-2 py-1 rounded-lg focus:outline-none focus:border-secondary-300`}
           disabled={disabled}
+          defaultValue={defaultValue}
         >
           <option value='' className="bg-primary-200/20">{placeholder}</option>
           {options.map((o, i) => <option key={i} value={o.value}>{o.option}</option>)}
@@ -154,6 +157,7 @@ export function InputPasswordAuth({
 }
 
 interface InputFileProp {
+  defaultImg?: string;
   placeholder?: string;
   onChangeFile?: (file: File) => void;
   accept?: string;
@@ -262,9 +266,10 @@ export function InputFileDashboard({
   placeholder,
   onChangeFile,
   accept = "image/*",
-  maxSize = 1
+  maxSize = 1,
+  defaultImg,
 }: InputFileProp) {
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(defaultImg||null);
   const [isDragging, setIsDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");

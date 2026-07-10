@@ -54,7 +54,7 @@ export default function CategoryProductsPage() {
               {
                 color: 'primary', type: 'edit', onClick: () => {
                   openModal({
-                    title: 'Nueva marca',
+                    title: 'Actualizar categoría',
                     size: 'md',
                     closeOnEscape: true,
                     closeOnOutside: true,
@@ -65,7 +65,7 @@ export default function CategoryProductsPage() {
               {
                 color: 'danger', type: 'delete', onClick: () => {
                   openModal({
-                    title: 'Eliminar marca',
+                    title: 'Eliminar categoría',
                     size: 'md',
                     closeOnEscape: true,
                     closeOnOutside: true,
@@ -76,7 +76,7 @@ export default function CategoryProductsPage() {
               {
                 color: 'neutral', type: 'more', onClick: () => {
                   openModal({
-                    title: 'Eliminar marca',
+                    title: 'Detalles de categoría',
                     size: 'md',
                     closeOnEscape: true,
                     closeOnOutside: true,

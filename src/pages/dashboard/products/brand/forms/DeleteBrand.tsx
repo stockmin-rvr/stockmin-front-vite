@@ -21,7 +21,9 @@ export default function DeleteBrand({index, brand}:{index: number, brand:Brand})
   return (
     <div className="flex flex-col justify-center items-center" >
       <MdDeleteForever className="text-danger-300 text-9xl" />
-      <p className="mb-5 text-center">¿Estas a punto de eliminar una marca? ten en cuenta q esta acción no se pude deshacer y los productos que estén usando esta marca quedaran “sin marca”.</p>
+      <p className="text-center">Estas a punto de eliminar la siguiente marca:</p>
+      <span className="font-semibold bg-neutral-100/50 p-2 rounded-xl my-2">{brand.name}</span>
+      <p className="text-center mb-5">Ten en cuenta que esta acción no se pude deshacer y los productos que estén usando esta marca quedaran “sin marca”.</p>
       {responseMessage.type !== 'success'&&
         <ButtonDashboard color="danger" onClick={deleteBrand} loading={loadingAction}>Si, eliminar</ButtonDashboard>
       }

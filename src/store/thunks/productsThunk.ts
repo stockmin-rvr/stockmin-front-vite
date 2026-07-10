@@ -5,19 +5,33 @@ import type { UpdateBrandType } from "../../pages/dashboard/products/brand/forms
 import type { CreateCategoryType } from "../../pages/dashboard/products/category/forms/schemas/create-category-schema";
 import type { UpdateCategoryType } from "../../pages/dashboard/products/category/forms/schemas/update-category-schema";
 import type { CreateProductType } from "../../pages/dashboard/products/list/forms/schemas/create-product-schema";
+import type { UpdateProductType } from "../../pages/dashboard/products/list/forms/schemas/update-product-schema";
 import { brandService } from "../../services/products/brand.service";
 import { categoryService } from "../../services/products/category.service";
 import { measurementUnitService } from "../../services/products/measurement-unit.service";
 import { productService } from "../../services/products/product.service";
-import { createBrand, createCategory, createMeasurementUnit, createProduct, deleteBrand, deleteCategory, deleteMeasurementUnit, resetResponseProducts, setBrands, setCategories, setLoadingActionProducts, setLoadingProducts, setMeasurementUnits, setResponseProducts, updateBrand, updateCategory } from "../slices/productsSlice"
+import { createBrand, createCategory, createMeasurementUnit, createProduct, deleteBrand, deleteCategory, deleteMeasurementUnit, deleteProduct, resetResponseProducts, setBrands, setCategories, setLoadingActionProducts, setLoadingProducts, setMeasurementUnits, setProducts, setResponseProducts, updateBrand, updateCategory, updateProduct } from "../slices/productsSlice"
 
 // ===================== BRANDS =====================
+export const findAllProductsApi = () => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(resetResponseProducts());
+            dispatch(setLoadingProducts(true));
+            const response = await productService.findAll();
+            dispatch(setProducts(response.data));
+        } catch (error) {
+            console.log(error);            
+        }finally{
+            dispatch(setLoadingProducts(false));
+        }
+    }
+}
 export const createProductApi = (data: CreateProductType, file?:File|null) => {
     return async (dispatch: AppDispatch) => {
         try {
             dispatch(setLoadingActionProducts(true));
             const response = await productService.create(data, file);
-            console.log('NUEVO', response)
             dispatch(createProduct(response.data));
             dispatch(setResponseProducts({type:'success', message: response.message})); 
         } catch (error) {
@@ -28,6 +42,41 @@ export const createProductApi = (data: CreateProductType, file?:File|null) => {
             setTimeout(() => {
                 dispatch(resetResponseProducts())
             }, 5000);
+        }
+    }
+}
+
+export const updateProductApi = ({index, productId, data, file}:{index: number, productId: string, data: UpdateProductType, file?:File|null}) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(setLoadingActionProducts(true));
+            const response = await productService.update(productId, data, file);
+            dispatch(updateProduct({index, data: response.data}));
+            dispatch(setResponseProducts({type:'success', message: response.message})); 
+        } catch (error) {
+            const message = getMessageErrorApi(error);
+            dispatch(setResponseProducts({type:'error', message}));         
+        }finally{
+            dispatch(setLoadingActionProducts(false));
+            setTimeout(() => {
+                dispatch(resetResponseProducts())
+            }, 5000);
+        }
+    }
+}
+
+export const deleteProductApi = ({index, productId}:{index: number, productId: string}) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(setLoadingActionProducts(true));
+            const response = await productService.delete(productId);
+            dispatch(deleteProduct(index));
+            dispatch(setResponseProducts({type:'success', message: response.message})); 
+        } catch (error) {
+            const message = getMessageErrorApi(error);
+            dispatch(setResponseProducts({type:'error', message}));         
+        }finally{
+            dispatch(setLoadingActionProducts(false));
         }
     }
 }

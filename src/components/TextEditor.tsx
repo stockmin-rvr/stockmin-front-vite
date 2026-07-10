@@ -101,3 +101,20 @@ export default function TextEditor({value = "", onChange, placeholder = "Escriba
     </div>
   );
 }
+
+type TextViewerProps = {
+  content: string;
+}
+
+export function TextViewer({
+  content
+}: TextViewerProps) {
+  return (
+    <div className="h-60 border-2 border-neutral-100/50 py-3 ps-3 rounded-xl">
+      <div
+        className={`h-full overflow-y-auto pe-3`}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
+    </div>
+  );
+}

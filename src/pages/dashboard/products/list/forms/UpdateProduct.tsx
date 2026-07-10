@@ -1,26 +1,38 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import type { Product } from "../../../../../types/models";
 import { Controller, useForm, type FieldErrors } from "react-hook-form";
-import { CreateProductSchema, type CreateProductType } from "./schemas/create-product-schema";
-import { InputRadioDashboard, SelectDashboard, InputTextDashboard, InputFileDashboard } from "../../../../../components/Inputs";
-import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { InputFileDashboard, InputRadioDashboard, InputTextDashboard, SelectDashboard } from "../../../../../components/Inputs";
 import { ButtonDashboard } from "../../../../../components/Buttons";
-import { useEffect, useState } from "react";
-import TextEditor from "../../../../../components/TextEditor";
-import { createProductApi } from "../../../../../store/thunks/productsThunk";
 import { ResponseMessage } from "../../../../../components/Messages";
+import { useAppDispatch, useAppSelector } from "../../../../../store/hooks";
+import { useEffect, useState } from "react";
 import { resetResponseProducts } from "../../../../../store/slices/productsSlice";
+import { UpdateProductSchema, type UpdateProductType } from "./schemas/update-product-schema";
+import TextEditor from "../../../../../components/TextEditor";
+import { updateProductApi } from "../../../../../store/thunks/productsThunk";
 
-export default function CreateProduct() {
-    const { register, handleSubmit, control, formState: { errors } } = useForm({ resolver: zodResolver(CreateProductSchema), defaultValues: { active: true, description: "<p></p>" } });
+export default function UpdateProduct({ index, product }: { index: number, product: Product }) {
+    const { register, handleSubmit, control, formState: { errors } } = useForm({
+        resolver: zodResolver(UpdateProductSchema),
+        defaultValues: {
+            brandId: product.brand ? product.brand._id : "",
+            categoryId: product.category ? product.category._id : "",
+            measurementUnitCode: product.measurementUnit ? product.measurementUnit.code : "",
+            code: product.code,
+            name: product.name,
+            description: product.description || "<p></p>",
+            active: product.active,
+        }
+    });
     const { loadingAction, brands, categories, measurementUnits, responseMessage } = useAppSelector(s => s.products);
     const [file, setFile] = useState<File | null>(null);
     const dispatch = useAppDispatch();
 
-    const onSubmit = (data: CreateProductType) => {
-        dispatch(createProductApi(data, file));
+    const onSubmit = (data: UpdateProductType) => {
+        dispatch(updateProductApi({index, data, productId:product._id, file}));
     }
 
-    const onError = (errors: FieldErrors<CreateProductType>) => {
+    const onError = (errors: FieldErrors<UpdateProductType>) => {
         console.log("Errores:", errors);
     };
 
@@ -36,6 +48,7 @@ export default function CreateProduct() {
                 <div className="flex gap-4">
                     <div className="w-60">
                         <InputFileDashboard
+                            defaultImg={product.img?.url}
                             placeholder="Peso máximo de 300KB"
                             onChangeFile={(file) => { setFile(file) }}
                             maxSize={300}
@@ -64,7 +77,7 @@ export default function CreateProduct() {
                                 label="unidad de medida:"
                                 placeholder="Sin medida"
                                 disabled={loadingAction}
-                                options={measurementUnits.filter(unit => unit._id).map(unit => ({ value: unit.code, option: unit.name }))}
+                                options={measurementUnits.filter(unit => unit._id).map(unit => ({ value: unit.code, option: unit.name.toUpperCase() }))}
                             />
                         </div>
 
@@ -104,7 +117,7 @@ export default function CreateProduct() {
                 </div>
             </div>
             <div className="flex gap-4 flex-col items-center justify-center">
-                <ButtonDashboard type="submit" loading={loadingAction}>Crear</ButtonDashboard>
+                <ButtonDashboard type="submit" loading={loadingAction}>Actualizar</ButtonDashboard>
                 <ResponseMessage {...responseMessage} />
             </div>
         </form>

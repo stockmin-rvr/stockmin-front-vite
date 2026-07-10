@@ -5,7 +5,7 @@ import { TbBrandDeliveroo } from "react-icons/tb";
 import { Link, Outlet, useLocation } from "react-router";
 import { useAppDispatch } from "../../../store/hooks";
 import { useEffect } from "react";
-import { findAllBrandsApi, findAllCategoriesApi, findAllMeasurementUnitsApi } from "../../../store/thunks/productsThunk";
+import { findAllBrandsApi, findAllCategoriesApi, findAllMeasurementUnitsApi, findAllProductsApi } from "../../../store/thunks/productsThunk";
 
 export default function ProductsPage() {
     const dispatch = useAppDispatch();
@@ -14,6 +14,7 @@ export default function ProductsPage() {
         dispatch(findAllCategoriesApi());
         dispatch(findAllBrandsApi());
         dispatch(findAllMeasurementUnitsApi());
+        dispatch(findAllProductsApi());
     }, [])
 
   return (

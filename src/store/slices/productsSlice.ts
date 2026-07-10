@@ -4,7 +4,7 @@ import type { ResponseMessageType } from "../../types/api";
 
 
 type ProductsState = {
-    products: Brand[],
+    products: Product[],
     brands: Brand[],
     categories: Category[],
     measurementUnits: MeasurementUnit[]
@@ -28,18 +28,24 @@ const productsSlice = createSlice({
     initialState,
     reducers: {
         // ===================== PRODUCTS =====================
-        setProducts: (state, action: PayloadAction<Brand[]>) => {
-            state.brands = [...action.payload];
+        setProducts: (state, action: PayloadAction<Product[]>) => {
+            state.products = [...action.payload];
         },
         createProduct: (state, action: PayloadAction<Product>) => {
-            state.products = [...state.products, action.payload];
+            state.products = [action.payload,...state.products];
+        },
+        updateProduct: (state, action: PayloadAction<{index: number, data: Product}>) => {
+            state.products[action.payload.index] = action.payload.data;
+        },
+        deleteProduct: (state, action: PayloadAction<number>) => {
+            state.products.splice(action.payload, 1);
         },
         // ===================== BRANDS =====================
         setBrands: (state, action: PayloadAction<Brand[]>) => {
             state.brands = [...action.payload];
         },
         createBrand: (state, action: PayloadAction<Brand>) => {
-            state.brands = [...state.brands, action.payload];
+            state.brands = [action.payload, ...state.brands];
         },
         updateBrand: (state, action: PayloadAction<{index: number, data: Brand}>) => {
             state.brands[action.payload.index] = action.payload.data;
@@ -52,7 +58,7 @@ const productsSlice = createSlice({
             state.categories = [...action.payload];
         },
         createCategory: (state, action: PayloadAction<Category>) => {
-            state.categories = [...state.categories, action.payload];
+            state.categories = [action.payload, ...state.categories];
         },
         updateCategory: (state, action: PayloadAction<{index: number, data: Category}>) => {
             state.categories[action.payload.index] = action.payload.data;
@@ -89,6 +95,8 @@ const productsSlice = createSlice({
 export const {
     setProducts,
     createProduct,
+    updateProduct,
+    deleteProduct,
 
     setBrands,
     createBrand,

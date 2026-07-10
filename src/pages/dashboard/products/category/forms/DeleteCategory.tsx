@@ -21,7 +21,9 @@ export default function DeleteCategory({ index, category }: { index: number, cat
   return (
     <div className="flex flex-col justify-center items-center" >
       <MdDeleteForever className="text-danger-300 text-9xl" />
-      <p className="mb-5 text-center">¿Estas a punto de eliminar una categoría? ten en cuenta que esta acción no se pude deshacer y los productos que estén usando esta categoría quedaran “sin categoría”.</p>
+      <p className="mb-5 text-center">Estas a punto de eliminar la siguiente categoría:</p>
+      <span className="font-semibold bg-neutral-100/50 p-2 rounded-xl my-2">{category.name}</span>
+      <p>Ten en cuenta que esta acción no se pude deshacer y los productos que estén usando esta categoría quedaran “sin categoría”.</p>
       {responseMessage.type !== 'success' &&
         <ButtonDashboard color="danger" onClick={deleteCategory} loading={loadingAction}>Si, eliminar</ButtonDashboard>
       }

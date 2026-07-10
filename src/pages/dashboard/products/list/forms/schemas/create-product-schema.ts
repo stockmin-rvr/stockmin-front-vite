@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const CreateProductSchema = z.object({
     brandId: z.string(),
     categoryId: z.string(),
-    measuremetUnitCode: z.string(),
+    measurementUnitCode: z.string(),
     code: z.string().min(1, "El código es requerido"),
     name: z.string().min(1, "El nombre es requerido"),
     description: z.string(),

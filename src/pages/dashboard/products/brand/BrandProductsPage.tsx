@@ -53,7 +53,7 @@ export default function BrandProductPage() {
               {
                 color: 'primary', type: 'edit', onClick: () => {
                   openModal({
-                    title: 'Nueva marca',
+                    title: 'Actualizar marca',
                     size: 'md',
                     closeOnEscape: true,
                     closeOnOutside: true,
@@ -75,7 +75,7 @@ export default function BrandProductPage() {
               {
                 color: 'neutral', type: 'more', onClick: () => {
                   openModal({
-                    title: 'Eliminar marca',
+                    title: 'Detalles marca',
                     size: 'md',
                     closeOnEscape: true,
                     closeOnOutside: true,
