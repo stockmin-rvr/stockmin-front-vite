@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useState } from "react";
+import { useAppSelector } from "../../../../store/hooks";
 import TableUnitActives from "./components/TableUnitActives";
 import TableUnitAvailables from "./components/TableUnitAvailables";
-import { findAllMeasurementUnitsApi } from "../../../../store/thunks/productsThunk";
 
 export default function MeasurementUnitProductsPage() {
   const [measurementUnits, setMeasurementUnits] = useState<'active' | 'available'>('available');
   const { measurementUnits:data, loading } = useAppSelector(s => s.products);
-  const dispatch = useAppDispatch();
 
-
-  useEffect(() => {
-    dispatch(findAllMeasurementUnitsApi());
-  }, [])
   return (
     <div className="w-full h-0 flex-1 flex flex-col gap-4">
       <div className="text-neutral-200">

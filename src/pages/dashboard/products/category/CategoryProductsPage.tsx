@@ -1,24 +1,18 @@
-import { useEffect } from "react";
 import { ButtonActions, ButtonDashboard } from "../../../../components/Buttons";
 import { DataTable } from "../../../../components/DataTable";
 import { PlusIconSM } from "../../../../components/Icons";
 import { useModal } from "../../../../hooks/useModal";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 import CreateCategory from "./forms/CreateCategory";
 import DeleteCategory from "./forms/DeleteCategory";
 import DetailsCategory from "./forms/DetailsCategory";
 import UpdateCategory from "./forms/UpdateCategory";
-import { findAllCategoriesApi } from "../../../../store/thunks/productsThunk";
+
 
 export default function CategoryProductsPage() {
   const { loading, categories } = useAppSelector(s => s.products);
   const { openModal } = useModal();
 
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(findAllCategoriesApi());
-  }, [])
   return (
     <div className="w-full h-0 flex-1 flex flex-col gap-4">
       <div className="w-full flex justify-between items-center shrink-0">

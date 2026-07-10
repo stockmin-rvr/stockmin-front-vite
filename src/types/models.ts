@@ -9,8 +9,8 @@ export type Owner = {
 export type Verification = {
     state: boolean;
     code?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export type Branch = {
@@ -21,8 +21,23 @@ export type Branch = {
     location: string,
     contacts: string,
     logoUrl: string,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string,
+    updatedAt?: string,
+}
+
+export type Product = {
+    _id: string,
+    branchId: string,
+    brand?: {_id: string, name: string, origin: string, active: boolean},
+    category?: {_id: string, name: string, description: string, active: boolean},
+    measuremetUnit: {code: string, name: string, abbreviation: string, description: string},
+    name: string,
+    code: string,
+    active: boolean,
+    description: string,
+    imgUrl?: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export type Brand = {
@@ -31,8 +46,8 @@ export type Brand = {
     name: string,
     origin?: string,
     active: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export type Category = {
@@ -41,8 +56,8 @@ export type Category = {
     name: string,
     description: string,
     active: boolean,
-    createdAt: string,
-    updatedAt: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
 
 export type MeasurementUnit = {

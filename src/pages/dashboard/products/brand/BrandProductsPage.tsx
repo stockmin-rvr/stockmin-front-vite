@@ -1,11 +1,9 @@
-import { useEffect } from "react";
 import { ButtonActions, ButtonDashboard } from "../../../../components/Buttons";
 import { DataTable } from "../../../../components/DataTable";
 import { PlusIconSM } from "../../../../components/Icons";
 import { useModal } from "../../../../hooks/useModal";
-import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
+import { useAppSelector } from "../../../../store/hooks";
 import CreateBrand from "./forms/CreateBrand";
-import { findAllBrandsApi } from "../../../../store/thunks/productsThunk";
 import UpdateBrand from "./forms/UpdateBrand";
 import DeleteBrand from "./forms/DeleteBrand";
 import DetailsBrand from "./forms/DetailsBrand";
@@ -13,11 +11,7 @@ import DetailsBrand from "./forms/DetailsBrand";
 export default function BrandProductPage() {
   const { brands, loading } = useAppSelector(s => s.products);
   const { openModal } = useModal();
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(findAllBrandsApi());
-  }, [])
   return (
     <div className="w-full h-0 flex-1 flex flex-col gap-4">
       <div className="w-full flex justify-between items-center shrink-0">

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { CreateBranchSchema, type CreateBranchType } from "./schema/register-branch-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { InputFile, InputTextAuth } from "../../../../components/Inputs";
+import { InputFileAuth, InputTextAuth } from "../../../../components/Inputs";
 import { CompanyIconSM, DocumentIconSM, LocationIconSM, MessageIconSM } from "../../../../components/Icons";
 import { ButtonAuth } from "../../../../components/Buttons";
 import { useAppDispatch, useAppSelector } from "../../../../store/hooks";
@@ -46,7 +46,7 @@ export default function RegisterBranchForm() {
                     {...register('contacts')}
                 />
 
-                <InputFile
+                <InputFileAuth
                     placeholder="El logo debe tener un tamaño de 1200x800 con un peso máximo de 500KB"
                     onChangeFile={(file) => { setFile(file) }}
                     maxSize={500}

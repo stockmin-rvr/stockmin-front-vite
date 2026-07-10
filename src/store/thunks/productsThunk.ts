@@ -4,10 +4,33 @@ import type { CreateBrandType } from "../../pages/dashboard/products/brand/forms
 import type { UpdateBrandType } from "../../pages/dashboard/products/brand/forms/schemas/update-brand-schema";
 import type { CreateCategoryType } from "../../pages/dashboard/products/category/forms/schemas/create-category-schema";
 import type { UpdateCategoryType } from "../../pages/dashboard/products/category/forms/schemas/update-category-schema";
+import type { CreateProductType } from "../../pages/dashboard/products/list/forms/schemas/create-product-schema";
 import { brandService } from "../../services/products/brand.service";
 import { categoryService } from "../../services/products/category.service";
 import { measurementUnitService } from "../../services/products/measurement-unit.service";
-import { createBrand, createCategory, createMeasurementUnit, deleteBrand, deleteCategory, deleteMeasurementUnit, resetResponseProducts, setBrands, setCategories, setLoadingActionProducts, setLoadingProducts, setMeasurementUnits, setResponseProducts, updateBrand, updateCategory } from "../slices/productsSlice"
+import { productService } from "../../services/products/product.service";
+import { createBrand, createCategory, createMeasurementUnit, createProduct, deleteBrand, deleteCategory, deleteMeasurementUnit, resetResponseProducts, setBrands, setCategories, setLoadingActionProducts, setLoadingProducts, setMeasurementUnits, setResponseProducts, updateBrand, updateCategory } from "../slices/productsSlice"
+
+// ===================== BRANDS =====================
+export const createProductApi = (data: CreateProductType, file?:File|null) => {
+    return async (dispatch: AppDispatch) => {
+        try {
+            dispatch(setLoadingActionProducts(true));
+            const response = await productService.create(data, file);
+            console.log('NUEVO', response)
+            dispatch(createProduct(response.data));
+            dispatch(setResponseProducts({type:'success', message: response.message})); 
+        } catch (error) {
+            const message = getMessageErrorApi(error);
+            dispatch(setResponseProducts({type:'error', message}));         
+        }finally{
+            dispatch(setLoadingActionProducts(false));
+            setTimeout(() => {
+                dispatch(resetResponseProducts())
+            }, 5000);
+        }
+    }
+}
 
 // ===================== BRANDS =====================
 export const findAllBrandsApi = () => {

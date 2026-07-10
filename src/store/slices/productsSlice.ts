@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit"
-import type { Brand, Category, MeasurementUnit } from "../../types/models"
+import type { Brand, Category, MeasurementUnit, Product } from "../../types/models"
 import type { ResponseMessageType } from "../../types/api";
 
 
@@ -30,6 +30,9 @@ const productsSlice = createSlice({
         // ===================== PRODUCTS =====================
         setProducts: (state, action: PayloadAction<Brand[]>) => {
             state.brands = [...action.payload];
+        },
+        createProduct: (state, action: PayloadAction<Product>) => {
+            state.products = [...state.products, action.payload];
         },
         // ===================== BRANDS =====================
         setBrands: (state, action: PayloadAction<Brand[]>) => {
@@ -85,6 +88,7 @@ const productsSlice = createSlice({
 
 export const {
     setProducts,
+    createProduct,
 
     setBrands,
     createBrand,

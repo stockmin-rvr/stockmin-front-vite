@@ -3,8 +3,19 @@ import { IoIosArrowForward } from "react-icons/io";
 import { MdOutlineCategory } from "react-icons/md";
 import { TbBrandDeliveroo } from "react-icons/tb";
 import { Link, Outlet, useLocation } from "react-router";
+import { useAppDispatch } from "../../../store/hooks";
+import { useEffect } from "react";
+import { findAllBrandsApi, findAllCategoriesApi, findAllMeasurementUnitsApi } from "../../../store/thunks/productsThunk";
 
 export default function ProductsPage() {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(findAllCategoriesApi());
+        dispatch(findAllBrandsApi());
+        dispatch(findAllMeasurementUnitsApi());
+    }, [])
+
   return (
     <div className="w-full h-full flex gap-4 flex-col">
       <HeaderProducts/>
